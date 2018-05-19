@@ -1,0 +1,731 @@
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>订货</title> 
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+  <meta name="author" content="" /> 
+  <!-- Le styles --> 
+  <link href="css/bootstrap.css" rel="stylesheet" /> 
+  <link href="css/buttons.css" rel="stylesheet" /> 
+  <link href="css/flat.css" rel="stylesheet" />
+  <link href="css/font-awesome.css" rel="stylesheet" />
+ </head> 
+ <body> 
+<div id="wrapper" class="viewer">
+    <div id="sidebar-wrapper">
+        <div class="well sidebar-nav">
+            <nav id="J_menuList" class="nav nav-list">
+            </nav>
+        </div>
+    </div>
+    <div id="page-content-wrapper" class="">
+        <div class="page-content">
+            <div class="container" id="J_list_Container">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="wrapper2" class="viewer wrapper countpage clearfix" style="display:none;">
+    <section class="order_title">
+        <div class="container" id="">
+            <div class="col-md-12 clearfix foot_orderList">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p class="notice">
+                           
+                        </p>
+                    </div>
+                    <div class="col-xs-6" style="display: none;">
+                        <p class="notice tar">
+                            共计
+                            <span class="price" id="price_txt">
+                                315元
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="oder_content">
+        <div class="container" id="J_order_list">
+        </div>
+    </section>
+    <section class="oder_submit">
+        <div class="container">
+            <button class="button button-rounded button-flat-action addOrder fixbtn" id="addOrder">返回</button>
+            <button class="clearOder button button-rounded button-flat-action addOrder fixbtn" id="clearOder">清空</button>
+            <button class="button button-rounded button-flat-action fr fixbtn" id="submitOrder">
+                下单
+            </button>
+        </div>
+    </section>
+</div>
+<div id="imgViewer" class="viewer" style="display:none" onclick="hideImg()">
+    <div class="container">
+        <div class="col-md-12 clearfix">
+            <div class="col-xs-12 foot-info">
+                <div class="imgViewer_contain">
+                    <div class="img_contain">
+                        <img src="" class="img-responsive" alt="Responsive image" />
+                    </div>
+                    <div id="J_imgInfo" class="info_contain clearfix">
+                        <strong>
+                            芒果布丁2
+                        </strong>
+                        <span class="colred">
+                            888元/粒
+                        </span>
+                        <small>
+                            524人买过
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="submitView" class="viewer clearfix" style="display:none">
+    <section class="submit_title">
+        <div class="container" id="">
+           
+            <div class="col-md-12 clearfix">
+                <div class="now_submit clearfix">
+                    <form role="form">
+        
+                        <div class="line-body clearfix" id="form_more">
+                            <span class="fl lh43">
+                               配送信息
+                            </span>
+                            <ul class="nav nav-pills tabdrop fr">
+                                <li class="dropdown pull-right tabdrop">
+                                    <a class="dropdown-toggle" id="J_btn_reg">
+                                        <i class="fa fa-th-list">
+                                        </i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="form-group" id="form_info">
+                            <label for="adress" class="mgt10">
+                                公司地址
+                            </label>
+                            <span class="twitter-typeahead">
+                                <input type="text" name="adress" class="form-control tt-query address" autocomplete="off"
+                                spellcheck="false" dir="auto">
+                            </span>
+                            <label for="gsname" class="mgt10">
+                                公司名称
+                            </label>
+                            <span class="twitter-typeahead">
+                                <input type="text" name="gsname" class="form-control tt-query gsname" autocomplete="off"
+                                spellcheck="false" dir="auto">
+                            </span>
+                            <label for="name" class="mgt10">
+                                姓名
+                            </label>
+                            <span class="twitter-typeahead">
+                                <input type="text" name="name" class="form-control tt-query name" autocomplete="off"
+                                spellcheck="false" dir="auto">
+                            </span>
+                            <label for="phone">
+                                联系方式
+                            </label>
+                            <span class="twitter-typeahead">
+                                <input type="text" name="phone" class="form-control tt-query phone" autocomplete="off"
+                                spellcheck="false" dir="auto">
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn_control fr">
+                                <a class="btn btn-default bottommargin" id="cancelSubmit">
+                                    取消
+                                </a>
+                                <span class="btn btn-info bottommargin" id="stickyGrowl">
+                                    确认
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div id="loadingView" class="viewer">
+    <div class="container">
+        <div class="col-md-12 clearfix loading">
+        </div>
+    </div>
+</div>
+<footer class="footFix footLeft">
+    <button id="myOrder" class="btn_change">
+        查看订单
+        <span class="num">0</span>
+    </button>
+</footer>
+<!-- Le javascript
+    ================================================== --> 
+  <!-- Placed at the end of the document so the pages load faster --> 
+  <script src="js/jquery.js"></script> 
+  <script src="js/bootstrap.min.js"></script> 
+  <script>
+		var iG = iG||{};
+        var baseURL = 'http://cart.onemorething.net.cn'
+        if(window.localStorage){
+            try{
+                iG = JSON.parse(localStorage["newzaiG"])||{};
+            }catch(e){
+                localStorage.removeItem("newzaiG");
+                iG = iG||{};
+            }
+        }else{
+            iG = iG||{};
+        }
+		$(function(){
+			setTimeout(function () { window.scrollTo(0, 1); }, 0);
+			/*$.ajax(
+					{
+						type:"post",
+						dataType:"json",
+						url:"getAllDish",
+		                success:function(result){
+		                	//alert(result);
+							iG.items = result;
+							init();//ajax成功后执行init();
+		                }
+					}
+			)
+			*/
+            setTimeout(function () { 
+                iG.items={
+                    "主食":[
+                            {id:"31",name:"糙米饭",cls:"主食",price:"0",sels:"0",imageUrl:"images/food01.jpeg",agent:'xm'},
+                            {id:"32",name:"糙米绿豆粥",cls:"主食",price:"0",sels:"0",imageUrl:"images/food02.jpeg",agent:'xm'},
+                            {id:"33",name:"叉烧包",cls:"主食",price:"0",sels:"0",imageUrl:"images/food03.jpeg",agent:'xm'},
+                            {id:"34",name:"玉米鸡蛋面",cls:"主食",price:"0",sels:"0",imageUrl:"images/food04.jpeg",agent:'xm'}
+                            ],
+                    "汤":[
+                            {id:"10",name:"木瓜鲫鱼汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food05.jpg",agent:'xm'},
+                            {id:"11",name:"莲藕血骨汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food05.jpeg",agent:'xm'},
+                            {id:"12",name:"凉瓜排骨汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food06.jpeg",agent:'xm'},
+                            {id:"13",name:"丝瓜鸡蛋汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food07.jpeg",agent:'xm'},
+                            {id:"14",name:"西红柿蛋花汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food08.jpeg",agent:'xm'},
+                            {id:"15",name:"鱼头豆腐汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food09.jpeg",agent:'xm'}
+                            ],
+                    "主菜":[
+                            {id:"101",cls:"主菜",name:"冬菜/枸杞/香芋蒸排骨",price:"0",sels:"0",imageUrl:"images/food10.jpeg",agent:'xm'},
+                            {id:"102",cls:"主菜",name:"土豆丝/胡萝卜炒蛋/肉",price:"0",sels:"0",imageUrl:"images/food11.jpeg",agent:'xm'},
+                            {id:"103",cls:"主菜",name:"红焖猪肘子",price:"0",sels:"0",imageUrl:"images/food12.jpeg",agent:'xm'},
+                            {id:"104",cls:"主菜",name:"冬菜/韭菜/葱/煎蛋",price:"0",sels:"0",imageUrl:"images/food13.jpeg",agent:'xm'},
+                            {id:"105",cls:"主菜",name:"青椒肉丝",price:"0",sels:"0",imageUrl:"images/food14.jpeg",agent:'xm'},
+                            {id:"106",cls:"主菜",name:"清蒸鱼",price:"0",sels:"0",imageUrl:"images/food16.jpeg",agent:'xm'},
+                            {id:"107",cls:"主菜",name:"白灼大虾",price:"0",sels:"0",imageUrl:"images/food17.jpeg",agent:'xm'},
+                            {id:"108",cls:"主菜",name:"丝瓜炒蛋",price:"0",sels:"0",imageUrl:"images/food18.jpeg",agent:'xm'},
+                            {id:"109",cls:"主菜",name:"冬菇焖鸡",price:"0",sels:"0",imageUrl:"images/food19.jpeg",agent:'xm'},
+                            {id:"110",cls:"主菜",name:"煎牛排",price:"0",sels:"0",imageUrl:"images/food20.jpeg",agent:'xm'},
+                            {id:"111",cls:"主菜",name:"烧鸭/烧鹅",price:"0",sels:"0",imageUrl:"images/food21.jpeg",agent:'xm'},
+                            {id:"112",cls:"主菜",name:"香芋炒排骨",price:"0",sels:"0",imageUrl:"images/food22.jpeg",agent:'xm'}
+                            ],
+                    "蔬菜":[
+                            {id:"201",name:"油麦菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food23.jpeg",agent: 'xm'},
+                            {id:"202",name:"芥末秋葵",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food24.jpeg",agent: 'xm'},
+                            {id:"203",name:"白菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food25.jpeg",agent: 'xm'},
+                            {id:"204",name:"薯叶",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food26.jpeg",agent: 'xm'},
+                            {id:"205",name:"通心菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food27.jpeg",agent: 'xm'},
+                            {id:"206",name:"拍黄瓜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food28.jpeg",agent: 'xm'},
+                            {id:"207",name:"生菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food29.jpeg",agent: 'xm'},
+                            ]
+                };
+                console.log(iG.items)
+                init();//ajax成功后执行init(); 
+            }, 20);//模拟ajax请求时间
+            // +
+            $("body").on("click",".list_id_respone",function(e){
+    			iG["order"] = iG["order"]||{};
+    			var index = $(this).attr("data_id");
+    			if(iG.order[index]){
+    				iG.order[index].counter = Number(iG.order[index].counter) + 1;
+    			}else{
+    				var obj = getIndex(index);
+    				iG.order[index] = obj;
+    				iG.order[index].counter = 1;
+    			}
+    		    if(window.localStorage){
+                  localStorage["newzaiG"] = JSON.stringify(iG);
+                }
+                // set order num
+                $('#myOrder .num').html(getObjectLength(iG.order))
+                var $target = $(e.currentTarget),
+                $targetId = $(e.currentTarget).attr('data_id')
+                $target.prev().val(iG.order[index].counter)
+                $target.prev().attr('value', iG.order[index].counter)
+        	});
+
+            // change input
+            $("body").on("change",".inputCounter",function(e){
+                var $target = $(e.currentTarget),
+                $targetId = $(e.currentTarget).attr('data_id'),
+                targetVal = $(e.currentTarget).val()
+                iG["order"] = iG["order"]||{};
+                var index = $(this).attr("data_id");
+                if(iG.order[index]){
+                    iG.order[index].counter = targetVal;
+                }else{
+                    var obj = getIndex(index);
+                    iG.order[index] = obj;
+                    iG.order[index].counter = targetVal;
+                }
+                if(window.localStorage){
+                  localStorage["newzaiG"] = JSON.stringify(iG);
+                }
+                // set order num
+                $('#myOrder .num').html(getObjectLength(iG.order))
+                $target.attr('value', targetVal)
+            });
+
+            // list_id_minus
+            $("body").on("click",".list_id_minus",function(e){
+                iG["order"] = iG["order"]||{};
+                var index = $(this).attr("data_id")
+                var $target = $(e.currentTarget),
+                    $targetId = $(e.currentTarget).attr('data_id')
+                if(iG.order[index]){
+                    if (iG.order[index].counter <= 1) {
+                        // iG.order[index].counter = iG.order[index].counter
+                        iG.order[index].counter = 0
+                    } else {
+                        iG.order[index].counter = iG.order[index].counter - 1;
+                    }
+                }else{
+                    console.log('is 0')
+                }
+                if(window.localStorage){
+                    localStorage["newzaiG"] = JSON.stringify(iG);
+                }
+                // set order num
+                if (iG.order[index] && iG.order[index].counter >= 0) {
+                    $target.next().val(iG.order[index].counter)
+                    $target.next().attr('value', iG.order[index].counter)
+                }
+                delectCounter0()
+                $('#myOrder .num').html(getObjectLength(iG.order))
+            });
+			
+			$("#myOrder").click(function(){
+				$(".wrapper,#wrapper").removeClass("show");
+				$(".wrapper,#wrapper").removeClass("hide");
+				$("#wrapper").addClass("hide");
+				$("#wrapper2").addClass("show")
+				//$("#J_order_Manager").siblings("div").remove();
+				$("#J_order_list").html(buildOrder(iG.order));
+				$("#price_txt").html(countPrice() + "元");
+                $('footer').hide()
+			});
+			$("body").on("click","#addOrder",function(){
+                delectCounter0()
+				$(".wrapper,#wrapper").removeClass("show");
+				$(".wrapper,#wrapper").removeClass("hide");
+				$("#wrapper").addClass("show");
+				$("#wrapper2").addClass("hide");
+                $('#myOrder .num').html(getObjectLength(iG.order))
+                $('footer').show()
+                setInputVal0()
+			});
+            // 放大
+			// $("body").on("click",".foot-info",function(){
+				// $("#imgViewer img").attr("src",$(this).attr("src"));
+				// $("#imgViewer").slideDown(100);
+				// var item = getIndex($(this).attr("data_id"));
+				// $("#J_imgInfo").html("<strong>"+ item.name +"</strong><span class=\"colred\">"+ item.price +"元/份</span><small>"+ item.sels +"人买过</small>").hide()
+				// var img = new Image()
+				// img.src = $(this).attr("src");
+				// if(img.complete){
+				// 	$(".imgViewer_contain").css("max-width",img.width + "px")
+				// 	$("#imgViewer .imgViewer_contain").css("margin-top",$(window).height() / 2 - img.height / 2 + "px");
+				// 	img = null;
+				// }else{
+				// 	img.onload=function(){
+				// 		$(".imgViewer_contain").css("max-width",this.width + "px");
+				// 		$("#imgViewer .imgViewer_contain").css("margin-top",$(window).height() / 2 - img.height / 2 + "px");
+				// 		img = null;
+				// 	};
+				// }
+			// });
+			// $("body").on("click","#imgViewer",function(){
+			// 	$("#imgViewer").slideUp(100);
+			// });
+            
+            // 订单页面加
+			$("body").on("click",".counter_plus",function(){
+				iG["order"] = iG["order"]||{};
+				var index = $(this).attr("data_id");
+				if(iG.order[index]){
+					iG.order[index].counter = iG.order[index].counter + 1;
+				}else{
+					var obj = getIndex(index);
+					iG.order[index] = obj;
+					iG.order[index].counter = 1;
+				}
+				$(this).siblings(".nocounter").html(iG.order[index].counter);
+				$("#price_txt").html(countPrice() + "元");
+                if(window.localStorage){
+                    localStorage["newzaiG"] = JSON.stringify(iG);
+                }
+			});
+            
+            // 订单页面减去
+			$("body").on("click",".counter_minus",function(){
+				iG["order"] = iG["order"]||{};
+				var index = $(this).attr("data_id");
+				if(iG.order[index].counter <= 1) {
+                    iG.order[index].counter = 0
+                    $(this).siblings(".nocounter").html(iG.order[index].counter);
+                    return
+                }
+				if(iG.order[index]){
+					iG.order[index].counter = iG.order[index].counter - 1;
+				}else{
+					var obj = getIndex(index);
+					iG.order[index] = obj;
+					iG.order[index].counter = 1;
+				}
+				$(this).siblings(".nocounter").html(iG.order[index].counter);
+				$("#price_txt").html(countPrice() + "元");
+                if(window.localStorage){
+                    localStorage["newzaiG"] = JSON.stringify(iG);
+                }
+			});
+                
+            // 清空
+			$("body").on("click","#clearOder",function(){
+				iG["order"] = {};
+				$("#J_order_list").html(buildOrder(iG.order));
+				$("#price_txt").html(countPrice() + "元");
+                if(window.localStorage){
+                    localStorage["newzaiG"] = JSON.stringify(iG);
+                }
+                $('#myOrder .num').html(getObjectLength(iG.order))
+			});
+            
+            // 切换
+			$("body").on("click","#J_menuList dd a",function(){
+              iG.indexMenu = $(this).attr("data_name");
+              $("#J_list_Container").html(listManger(iG.items));
+              $("#J_menuList .active").removeClass("active");
+              $(this).parent("dd").addClass("active");
+              setInputVal0()
+            });
+
+			$("#remote_order").click(function(){
+				$(".nav-tabs li.active").removeClass("active");
+				$(this).parent("li").addClass("active");
+				$("#form_desk").slideUp();
+				$("#form_more").slideUp();
+				$("#form_info").slideDown();
+			});
+
+			$("#now_order").click(function(){
+				$(".nav-tabs li.active").removeClass("active");
+				$(this).parent("li").addClass("active");
+				$("#form_desk").slideDown();
+				$("#form_more").slideDown();
+				$("#form_info").slideUp();
+			});
+
+            // 配送切换隐藏
+			$("#J_btn_reg").click(function(){
+				$("#form_info").stop().toggle("normal","linear");
+			});
+
+            //提交订单 
+			$("#submitOrder").click(function(){
+                alert('请截图发送至本人微信')
+                return
+                delectCounter0()
+                // var orderLength = getObjectLength(iG.order)
+                // if (orderLength === 0) {
+                //     alert('请选择商品')
+                //     return
+                // }
+				$(".viewer:visible").removeClass("show").addClass("hide");
+				$("#submitView").removeClass("hide").addClass("show");
+			})
+
+            // 取消下单
+			$("#cancelSubmit").click(function(){
+                $(".viewer:visible").removeClass("show").addClass("hide");
+                $("#wrapper2").removeClass("hide").addClass("show");
+            });
+
+            $("#stickyGrowl").click( function () {
+                var addressVal = $('.address').val(),
+                    gsnameVal = $('.gsname').val(),
+                    nameVal = $('.name').val(),
+                    phoneVal = $('.phone').val()
+                // if (addressVal === '' || undefined) {
+                //     alert('请输入公司地址')
+                //     return
+                // }
+                // if (gsnameVal === '' || undefined) {
+                //     alert('请输入公司名称')
+                //     return
+                // }
+                // if (nameVal === '' || undefined) {
+                //     alert('请输入联系人姓名')
+                //     return
+                // }
+                // if (phoneVal === '' || undefined) {
+                //     alert('请输入联系人电话')
+                //     return
+                // }
+                var params = {
+                  realname: nameVal,
+                  phone: phoneVal,
+                  company: gsnameVal,
+                  address: addressVal,
+                  num1: 0,
+                  num2: 0,
+                  num3: 0,
+                  num4: 0,
+                  num5: 0,
+                  num6: 0,
+                  num7: 0,
+                  num8: 0,
+                  num9: 0,
+                  num10: 0,
+                  num11: 0,
+                  num12: 0,
+                  num13: 0,
+                  num14: 0,
+                  num15: 0,
+                  num16: 0,
+                  num17: 0,
+                  num18: 0,
+                  num19: 0,
+                  num20: 0,
+                  num21: 0,
+                  num22: 0,
+                  num23: 0,
+                  num24: 0,
+                  num25: 0,
+                  num26: 0,
+                  num27: 0,
+                  num28: 0
+                }
+                for (var i in iG.order) {
+                    params['num' + i] = iG.order[i].counter
+                }
+                window.localStorage.setItem('newsubmitList', JSON.stringify(params))
+                $.ajax({
+                    type:"post",
+                    data: params,
+                    dataType:"json",
+                    url: baseURL + "/Hwry/order",
+                    success:function(result){
+                        console.log(result)
+                        if (result.code == 200) {
+                            alert(result.message)
+                            window.localStorage.setItem('newsubmitList', JSON.stringify(params))
+                            window.location.href = './order.html'
+                        } else {
+                            alert(result.message)
+                        }
+                    },
+                    error: function (data) {
+                        alert('暂时无法提交，请重试')
+                    }
+                })
+			})
+		});
+        // 获取对象长度
+        function getObjectLength(obj) {
+             var count = 0
+             for(var i in obj){
+                 count ++
+             }
+             return count
+        }
+
+        function init(){
+           // getOpenid()
+            setMenu(iG.items);
+            delectCounter0()
+            $('#myOrder .num').html(getObjectLength(iG.order))
+            $("#J_list_Container").html(listManger(iG.items));
+            $("#loadingView").addClass("hide");
+            $('#myOrder .num').html(getObjectLength(iG.order))
+            setInputVal0()
+        }
+        
+        function getOpenid() {
+            var _this = this
+            $.ajax({
+                type: 'get',
+                url: baseURL + '/Hwry/get_openid',
+                dataType: 'json',
+                success: function(result) {
+                  if (result.code == 200) {
+                        setMenu(iG.items);
+                        delectCounter0()
+                        $('#myOrder .num').html(getObjectLength(iG.order))
+                        $("#J_list_Container").html(listManger(iG.items));
+                        $("#loadingView").addClass("hide");
+                        $('#myOrder .num').html(getObjectLength(iG.order))
+                        setInputVal0()
+                  } else {
+                        window.location.href = baseURL + '/Hwry/get_openid'
+                  }
+                },
+                error: function(data) {
+                  alert('无法获取数据，请退出重试')
+                },
+                complete: function(XMLHttpRequest, status) {
+                  // 请求完成后最终执行参数
+                }
+            })
+        }
+
+        function setMenu(_list){
+            iG.menu = [];
+            iG.indexMenu = (function(){
+                var menu;
+                var count = 0;
+                for(var i in _list){
+                    if(count===0){
+                        menu =  i;
+                    }
+                    count++;
+                    iG.menu.push(i);
+                }
+                return menu;
+            })();
+            buildMenu(iG.menu);
+        }
+        
+        function buildMenu(_list){
+            var menuHtml = "<dl>";
+            var active;
+            for(var i in _list){
+                active = "";
+                if(_list[i]===iG.indexMenu)active = "active";
+                menuHtml += "<dd class=\""+active+"\"><a data_name=\""+ _list[i] +"\">"+ _list[i] +"</a></dd>"
+            
+            }
+			menuHtml += "</dl>";
+            $("#J_menuList").html(menuHtml);
+        }
+        
+		function getIndex(_id){
+            var indexList = iG.items[iG.indexMenu];
+			for(var i in indexList){
+				if(indexList[i].id===_id){
+					return indexList[i]
+				}
+			}
+		}
+		function submit(){
+			var data = iG.order;
+			var result = [];
+			for(var i in data){
+				result.push({id:iG.order[i].id,counter:iG.order[i].counter});
+			}
+			return JSON.stringify(result);
+		}
+		
+		function countPrice(){
+			var price = 0;
+			for(var i in iG.order){
+				price += Number(iG.order[i].price)*iG.order[i].counter;
+			}
+			return price;
+		}
+		function listManger(_list){
+			var result = "";
+			var listArr = [];
+            var indexList = _list[iG.indexMenu];
+			for(var i in indexList){
+				listArr.push(indexList[i]);
+				if(Math.floor(i/3)===0&&i>2){
+					result += "<div class=\"row\">";
+					result += buildList(listArr);
+					result += "</div>";
+					listArr = [];
+				}
+			}
+			result += "<div class=\"row\">";
+			result += buildList(listArr);
+			result += "</div>";
+			return result;
+		}
+        function buildList(_list){
+            iG["order"] = iG["order"]||{}
+            var orderLength = getObjectLength(iG.order)
+			var result = ""
+			for(var i in _list){
+				result += "<div class=\"col-md-4 clearfix foot-items\"><div class=\"col-xs-4 foot-img\"><img src=\""+_list[i].imageUrl+"\" class=\"img-responsive\" onclick=\"showCurrentImg(event)\" alt=\"Responsive image\" data_id=\""+_list[i].id+"\" ></div><div class=\"col-xs-6 foot-info\"><p class=\"foot-info_p\"><strong class=\"foot-info--strong\">"+_list[i].name+"</strong></p><p class=\"colred\">"+_list[i].agent+"烹饪</p></div><div class=\"col-xs-2 icons-pick foot-pick\"><div class=\"btn_wrap btn_only_wrap\"><button class=\"minus list_minus list_id_minus\" data_id=\""+_list[i].id+"\"><strong></strong></button><input onkeyup=\"if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}\" type=\"number\" data_id=\""+_list[i].id+"\" placeholder=\"0\" value=\""+_list[i].counter+"\" class=\"inputCounter\" /><button class=\"list_add list_id_respone\" data_id=\""+_list[i].id+"\"><strong></strong></button><em class=\"fixBig fake\"></em></div></div></div>"
+				//<button ontouchstart=\"\" class=\"list_id_respone button button-circle button-flat-primary fa fa-plus\" data_id=\""+_list[i].id+"\"></button>	
+                // <p><small>"+_list[i].sels+"人买过</small></p>
+			}
+			return result;
+		}
+		function buildOrder(_list){
+			var result = "<div class=\"row\" id=\"J_order_Manager\"><div class=\"col-xs-12 clearfix board_content\"><div class=\"col-xs-4 title_contain\"><p class=\"menu_title \">购物车</p></div><div class=\"col-xs-2\"></div><div class=\"col-xs-3 title_contain\"><button class=\"button button-rounded button-flat-action\" id=\"addOrder\" style=\"display:none\">选择餐品</button></div><div class=\"col-xs-3 title_contain\"><button id=\"clearOder\"class=\"button button-rounded button-flat\" style=\"display:none\">清空</button></div></div></div>";
+			var check = true;
+			
+			for(var i in _list){
+				if(_list[i].counter === 0)continue;
+				check = false;
+				result += "<div class=\"row gray_line\"><div class=\"col-md-12 clearfix board_content\"><div class=\"col-xs-6\"><div class=\"col-md-6 clearfix order_item_name\"><label>"+_list[i].cls+"</label></div><div class=\"col-md-6 clearfix order_price\">"+_list[i].name+"</div></div><div class=\"col-xs-6\"><div class=\"btn_wrap counter\"><button class=\"list_minus counter_minus fl\" style=\"display: inline-block;\" data_id=\""+_list[i].id+"\" ontouchstart=\"\"><strong></strong></button><i class=\"nocounter fl\" style=\"display: inline-block;\">"+_list[i].counter+"</i><button class=\"list_add counter_plus\" data_id=\""+_list[i].id+"\" ontouchstart=\"\"><strong></strong></button><em class=\"fixBig  fake\"></em></div></div></div></div>";		
+				
+			}
+			if(check){
+				result += "<div class=\"row gray_line\"><div class=\"col-md-12 clearfix board_content\"><p style=\"text-align: center;\"><span>亲，还没选到心仪的餐品喔，点加号开始选择餐品吧！</span></p></div></div>";
+			}
+			return result;
+		}
+        // 如果input value 为0； 设置改input 为空
+        function setInputVal0 () {
+            iG["order"] = iG["order"]||{}
+            var ObjectLength = getObjectLength(iG["order"])
+            if (ObjectLength == 0 ) {
+                for (var i = 0; i < $('.inputCounter').length; i++) {
+                    $('.inputCounter')[i].value = '' 
+                }
+                return
+            }
+            for (var i = 0; i < $('.inputCounter').length; i++) {
+                for (var obj in iG.order) {
+                    if (iG.order[obj].id == $('.inputCounter')[i].getAttribute('data_id')) {
+                        $('.inputCounter')[i].value = (iG.order[obj].counter) 
+                        break;
+                    } else {
+                        $('.inputCounter')[i].value = ''
+                    }
+                }   
+            }
+        }
+        // 如果order 对象里面选择数量为0.删除该项
+        function delectCounter0 () {
+            iG["order"] = iG["order"]||{};
+            for (var index in iG.order) {
+                if(iG.order[index].counter === 0) {
+                    delete iG.order[index]
+                }
+            }
+        }
+        function showCurrentImg (event) {
+            var $target = $(event.currentTarget)
+            $("#imgViewer img").attr("src",$target.attr("src"));
+            $("#imgViewer").fadeIn(200);
+            var item = getIndex($target.attr("data_id"));
+            $("#J_imgInfo").html("<strong>"+ item.name +"</strong><span class=\"colred\">"+ item.price +"元/份</span><small>"+ item.sels +"人买过</small>").hide()
+            var img = new Image()
+            img.src = $target.attr("src");
+        }
+        function hideImg () { 
+            $("#imgViewer").fadeOut(200);
+        }
+	</script>  
+ </body>
+</html>

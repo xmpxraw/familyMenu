@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <!-- <title>我的订单</title>  -->
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" /> 
+  <meta name="author" content="" /> 
+  <!-- Le styles --> 
+  <link href="css/bootstrap.css" rel="stylesheet" /> 
+  <link href="css/buttons.css" rel="stylesheet" /> 
+  <link href="css/flat.css" rel="stylesheet" /> 
+  <link href="css/font-awesome.css" rel="stylesheet" /> 
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements --> 
+  <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]--> 
+  <!-- Le fav and touch icons --> 
+  <script>
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		WeixinJSBridge.call('hideToolbar');
+	});
+</script> 
+ </head> 
+ <body> 
+  <div id="wrapper2" class="viewer wrapper countpage clearfix show" style="display:none"> 
+   <section class="order_title"> 
+    <div class="container" id=""> 
+     <div class="col-md-12 clearfix foot_orderList"> 
+      <div class="row"> 
+       <div class="col-xs-6"> 
+        <p class="notice"> </p> 
+       </div> 
+       <div class="col-xs-6"> 
+        <!-- <p class="notice tar"> 共计 <span class="price" id="price_txt">46元</span> </p>  -->
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </section> 
+   <section class="oder_content"> 
+    <div class="container" id="J_order_list">
+     <div class="row" id="J_order_Manager"> 
+      <div class="col-xs-12 clearfix board_content"> 
+       <div class="col-xs-4 title_contain"> 
+        <p class="menu_title ">我的订单</p> 
+       </div> 
+       <div class="col-xs-2"> 
+       </div> 
+       
+       <div class="col-xs-3 title_contain"> 
+        
+       </div> 
+      </div> 
+     </div> 
+     <div class="gray_line_container">
+       <!-- <div class="row gray_line"> 
+        <div class="col-md-12 clearfix board_content"> <div class="col-xs-6"> <div class="col-md-6 clearfix order_item_name"> <label>五花肉</label> </div><div class="col-md-6 clearfix order_price">23元一份</div> </div><div class="col-xs-6"><div class="btn_wrap counter"><i class="nocounter fl" style="display: inline-block;">1</i></div></div></div>
+       </div> -->
+     </div>
+
+    </div> 
+   </section> 
+  </div>   
+ </body>
+  <script src="js/jquery.js"></script> 
+  <script>
+    var baseURL = 'http://cart.onemorething.net.cn'
+      var phoneItem = {
+                    "主食":[
+                            {id:"31",name:"糙米饭",cls:"主食",price:"0",sels:"0",imageUrl:"images/food01.jpeg",agent:'xm'},
+                            {id:"32",name:"糙米绿豆粥",cls:"主食",price:"0",sels:"0",imageUrl:"images/food02.jpeg",agent:'xm'},
+                            {id:"33",name:"叉烧包",cls:"主食",price:"0",sels:"0",imageUrl:"images/food03.jpeg",agent:'xm'},
+                            {id:"34",name:"玉米鸡蛋面",cls:"主食",price:"0",sels:"0",imageUrl:"images/food04.jpeg",agent:'xm'}
+                            ],
+                    "汤":[
+                            {id:"10",name:"木瓜鲫鱼汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food05.jpg",agent:'xm'},
+                            {id:"11",name:"莲藕血骨汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food05.jpeg",agent:'xm'},
+                            {id:"12",name:"凉瓜排骨汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food06.jpeg",agent:'xm'},
+                            {id:"13",name:"丝瓜鸡蛋汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food07.jpeg",agent:'xm'},
+                            {id:"14",name:"西红柿蛋花汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food08.jpeg",agent:'xm'},
+                            {id:"15",name:"鱼头豆腐汤",cls:"汤",price:"0",sels:"0",imageUrl:"images/food09.jpeg",agent:'xm'}
+                            ],
+                    "主菜":[
+                            {id:"101",cls:"主菜",name:"冬菜/枸杞/香芋蒸排骨",price:"0",sels:"0",imageUrl:"images/food10.jpeg",agent:'xm'},
+                            {id:"102",cls:"主菜",name:"土豆丝/胡萝卜炒蛋/肉",price:"0",sels:"0",imageUrl:"images/food11.jpeg",agent:'xm'},
+                            {id:"103",cls:"主菜",name:"红焖猪肘子",price:"0",sels:"0",imageUrl:"images/food12.jpeg",agent:'xm'},
+                            {id:"104",cls:"主菜",name:"冬菜/韭菜/葱/煎蛋",price:"0",sels:"0",imageUrl:"images/food13.jpeg",agent:'xm'},
+                            {id:"105",cls:"主菜",name:"青椒肉丝",price:"0",sels:"0",imageUrl:"images/food14.jpeg",agent:'xm'},
+                            {id:"106",cls:"主菜",name:"清蒸鱼",price:"0",sels:"0",imageUrl:"images/food16.jpeg",agent:'xm'},
+                            {id:"107",cls:"主菜",name:"白灼大虾",price:"0",sels:"0",imageUrl:"images/food17.jpeg",agent:'xm'},
+                            {id:"108",cls:"主菜",name:"丝瓜炒蛋",price:"0",sels:"0",imageUrl:"images/food18.jpeg",agent:'xm'},
+                            {id:"109",cls:"主菜",name:"冬菇焖鸡",price:"0",sels:"0",imageUrl:"images/food19.jpeg",agent:'xm'},
+                            {id:"110",cls:"主菜",name:"煎牛排",price:"0",sels:"0",imageUrl:"images/food20.jpeg",agent:'xm'},
+                            {id:"111",cls:"主菜",name:"烧鸭/烧鹅",price:"0",sels:"0",imageUrl:"images/food21.jpeg",agent:'xm'},
+                            {id:"112",cls:"主菜",name:"香芋炒排骨",price:"0",sels:"0",imageUrl:"images/food22.jpeg",agent:'xm'}
+                            ],
+                    "蔬菜":[
+                            {id:"201",name:"油麦菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food23.jpeg",agent: 'xm'},
+                            {id:"202",name:"芥末秋葵",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food24.jpeg",agent: 'xm'},
+                            {id:"203",name:"白菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food25.jpeg",agent: 'xm'},
+                            {id:"204",name:"薯叶",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food26.jpeg",agent: 'xm'},
+                            {id:"205",name:"通心菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food27.jpeg",agent: 'xm'},
+                            {id:"206",name:"拍黄瓜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food28.jpeg",agent: 'xm'},
+                            {id:"207",name:"生菜",cls:"蔬菜",price:"0",sels:"0",imageUrl:"images/food29.jpeg",agent: 'xm'},
+                            ]
+                };
+    $(function (){
+      init()
+    })
+    function init () {
+      var data = JSON.parse(window.localStorage.getItem('newsubmitList'))
+        for (var i in phoneItem) {
+          for (var obj in phoneItem[i]) {
+            phoneItem[i][obj]['num' + phoneItem[i][obj].id] = data['num' + phoneItem[i][obj].id]
+          }
+        }
+        var result = ""
+        result = buildList()
+        $('.gray_line_container').html(result)
+      // $.ajax({
+      //   type:"post",
+      //   dataType:"json",
+      //   url: baseURL + "/Hwry/order_lists",
+      //   success:function(result){
+      //       var data = result.list
+      //       if (result.code == 200) {
+      //         for (var i in phoneItem) {
+      //           for (var obj in phoneItem[i]) {
+      //             phoneItem[i][obj]['num' + phoneItem[i][obj].id] = data['num' + phoneItem[i][obj].id]
+      //           }
+      //         }
+      //       }
+      //       var result = ""
+      //       result = buildList()
+      //       $('.gray_line_container').html(result)
+      //   },
+      //   error: function (data) {
+      //       alert('暂时无法获取数据，请重试')
+      //   }
+      // })
+    }
+    function buildList(){
+        var _list = phoneItem
+        var result = ""
+        for(var i in _list){
+          for (var obj in _list[i]) {
+            if (_list[i][obj]['num' + phoneItem[i][obj].id] != '0') {
+              result += "<div class=\"row gray_line\"><div class=\"col-md-12 clearfix board_content\"> <div class=\"col-xs-6\"> <div class=\"col-md-6 clearfix order_item_name\"> <label>" + _list[i][obj].cls + "(" +  _list[i][obj].agent + ")" +"</label> </div><div class=\"col-md-6 clearfix order_price\">" + _list[i][obj].name + "</div> </div><div class=\"col-xs-6\"><div class=\"btn_wrap counter\"><i class=\"nocounter fl\" style=\"display: inline-block;\">"+ _list[i][obj]['num' + phoneItem[i][obj].id] +"</i></div></div></div></div>"
+            }
+          }
+      }
+      return result;
+    }
+  </script>
+</html>

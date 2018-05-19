@@ -1,0 +1,128 @@
+body, html {
+  background-color: #fff; }
+
+.page-project {
+  font-size: .7rem;
+  background-color: #fff;
+  color: #333; }
+  .page-project .wpp-pt-15 {
+    padding-top: .3rem; }
+  .page-project .wpp-pb-15 {
+    padding-bottom: .3rem; }
+  .page-project label {
+    display: inline-block;
+    text-align: left;
+    position: relative; }
+  .page-project .mustInput:before {
+    position: absolute;
+    content: '*';
+    color: red;
+    left: -.4rem;
+    top: 3px;
+    font-size: .7rem; }
+  .page-project ul li {
+    line-height: 2rem;
+    height: 2rem;
+    background: #fff;
+    border-bottom: 1px solid #eee; }
+    .page-project ul li label {
+      width: 5rem; }
+    .page-project ul li .longLabelTitle7word {
+      width: 6rem; }
+    .page-project ul li .longLabelTitle10word {
+      width: 7rem; }
+    .page-project ul li input {
+      line-height: 1.3rem;
+      width: 8rem;
+      height: 1.3rem;
+      padding-left: 5px;
+      border: 1px solid #eee;
+      border-radius: .1rem; }
+    .page-project ul li .include2Item {
+      width: 3.3rem;
+      margin-right: .2rem; }
+    .page-project ul li .include3Item {
+      width: 4rem;
+      margin-right: .2rem; }
+    .page-project ul li .selectItem {
+      width: 3rem;
+      height: 1.3rem;
+      line-height: 1.3rem;
+      border: 1px solid #eee;
+      border-radius: .1rem;
+      font-size: .7rem;
+      padding-left: .3rem; }
+  .page-project .choose-item {
+    line-height: 2rem;
+    height: 2rem;
+    background: #fff;
+    border-bottom: 1px solid #eee; }
+    .page-project .choose-item #destory__val {
+      width: 3rem;
+      height: 1.3rem;
+      line-height: 1.3rem;
+      border: 1px solid #eee;
+      border-radius: .1rem;
+      font-size: .7rem; }
+  .page-project .backup {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid #eee; }
+    .page-project .backup label {
+      vertical-align: 1.3rem; }
+    .page-project .backup textarea {
+      resize: none;
+      border: 1px solid #eee;
+      border-radius: .1rem;
+      width: 12rem;
+      height: 3rem;
+      font-size: .6rem;
+      padding: 5px; }
+  .page-project .get-Place {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid #eee;
+    line-height: 1.5; }
+  .page-project .uploadPage {
+    margin: 1rem 0; }
+  .page-project .img-container ul {
+    overflow: hidden;
+    padding: .75rem 0;
+    margin-bottom: 1rem;
+    display: block; }
+    .page-project .img-container ul li {
+      z-index: 9;
+      width: 30%;
+      height: 4rem;
+      margin-left: 2%;
+      float: left;
+      border: 1px solid #eee;
+      border-radius: .1rem;
+      position: relative; }
+      .page-project .img-container ul li .addImg {
+        width: 2rem;
+        height: 2rem;
+        position: absolute;
+        left: 50%;
+        margin-left: -1rem;
+        margin-top: 1rem; }
+      .page-project .img-container ul li .delete {
+        width: 1rem;
+        height: 1rem;
+        line-height: 1rem;
+        display: inline-block;
+        position: absolute;
+        right: -.4rem;
+        top: -.4rem;
+        z-index: 99;
+        border: 1px solid #eee;
+        border-radius: 50%;
+        text-align: center;
+        background: red;
+        color: #fff; }
+      .page-project .img-container ul li .showImg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0; }

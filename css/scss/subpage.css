@@ -1,0 +1,41 @@
+.page-subpage .longNumber.longNumber.longNumber.longNumber.longNumber {
+  width: 13rem; }
+
+.page-subpage .grayBtn.grayBtn.grayBtn.grayBtn {
+  background: #ababab; }
+
+.page-subpage ul {
+  font-size: .7rem;
+  margin-bottom: 3rem; }
+  .page-subpage ul li {
+    padding: .75rem;
+    background: #fff;
+    margin-top: .5rem;
+    position: relative; }
+    .page-subpage ul li .btn {
+      margin-top: .7rem;
+      margin-left: .75rem;
+      position: absolute;
+      right: .75rem;
+      bottom: .75rem; }
+      .page-subpage ul li .btn a {
+        display: inline-block;
+        width: 100%;
+        color: #fff;
+        height: 100%; }
+      .page-subpage ul li .btn a:visited, .page-subpage ul li .btn a:active {
+        text-decoration: none;
+        color: #fff; }
+    .page-subpage ul li .checkStore {
+      position: absolute;
+      right: 4rem;
+      bottom: .75rem; }
+    .page-subpage ul li .number {
+      width: 9rem;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+      word-wrap: break-word;
+      white-space: nowrap;
+      margin-top: .5rem; }
